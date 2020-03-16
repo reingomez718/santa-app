@@ -41,9 +41,8 @@ router.post(
     const userName = req.body.userid;
     const wish = req.body.wish;
     const response: SendGiftResponse = await sendGift(userName, wish);
-    if (response.result !== 'SUCCESS') return;
-    
     console.log(response);
+    if (response.result !== 'SUCCESS') return;
   }
 );
 
