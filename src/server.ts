@@ -7,9 +7,7 @@ import express from 'express';
 import morgan from 'morgan';
 
 // init project
-const morgan = require('morgan');
 const app = express();
-const bodyParser = require('body-parser');
 
 app.use(bodyParser());
 app.use(morgan());
@@ -26,6 +24,7 @@ app.get('/', (request, response) => {
 });
 
 // listen for requests :)
-const listener = app.listen(process.env.PORT || 3000, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
+const port = process.env.PORT || 3000;
+const listener = app.listen(port, function () {
+  console.log(`Your app is listening on port ${port}');
 });
