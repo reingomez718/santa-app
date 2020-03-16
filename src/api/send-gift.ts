@@ -1,6 +1,6 @@
 import { getUserUid } from './get-user-uid';
 import { getUserProfile } from './get-user-profile';
-import { getAge } from './utils/get-age';
+import { getAge } from '../utils/get-age';
 import { UserProfile } from '../common/interface';
 
 export async function sendGift(userName: string, wish: string, maxAge: number = 10): Promise<SendGiftResponse> {
@@ -20,16 +20,15 @@ export async function sendGift(userName: string, wish: string, maxAge: number = 
   return { result: 'SUCCESS', userProfile: userProfileResult.userProfile };
 }
 
-interface SendGiftResponse {
+export interface SendGiftResponse {
   result: SendGiftResult;
   userProfile?: UserProfile
 }
 
-export type SendGiftResult =
+type SendGiftResult =
   | 'SUCCESS'
   | 'USER_UNREGISTERED'
   | 'USER_TOO_OLD'
   | 'USER_EMPTY'
   | 'WISH_EMPTY'
   | 'ERROR';
-  

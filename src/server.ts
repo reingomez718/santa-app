@@ -7,7 +7,7 @@ import express from 'express';
 import morgan from 'morgan';
 import { getUserUid } from './api/get-user-uid';
 import { getUserProfile } from './api/get-user-profile';
-import fetch from 'node-fetch';
+import { sendGift, SendGiftResponse } from './api/send-gift';
 
 // init
 const app = express();
@@ -37,8 +37,13 @@ router.get(
 
 router.post(
   '/sendGift',
-  (req: Request, res: Response) => { 
-      console.log(`userid: ${req.body.userid} | wish:${req.body.wish}`);
+  async (req: Request, res: Response): Promise<void> => {
+    const userName = req.body.userid;
+    const wish = req.body.wish;
+    const response: SendGiftResponse = await sendGift(userName, wish);
+    if (response.result !== 'SUCCESS') return;
+    
+    console.log(response);
   }
 );
 
