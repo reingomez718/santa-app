@@ -12,7 +12,6 @@ export function sendEmail(userName: string, wish: string, userProfile: UserProfi
   }
   transporter.sendMail(message, function(err, info) {
     if (err) {
-      console.log('NO')
       return false;
     }
   });

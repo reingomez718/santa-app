@@ -2,7 +2,7 @@ import { getUserUid } from './get-user-uid';
 import { getUserProfile } from './get-user-profile';
 import { getAge } from '../utils/get-age';
 import { UserProfile, SendGiftResult } from '../common/interface';
-import { sendEmail } from '../utils/send-email';
+import { scheduleEmail } from '../utils/schedule-email';
 
 export async function sendGift(userName: string, wish: string, maxAge: number = 10): Promise<SendGiftResponse> {
   // User existence check
@@ -20,7 +20,7 @@ export async function sendGift(userName: string, wish: string, maxAge: number = 
   if (age >= maxAge) return { result: 'USER_TOO_OLD' };
 
   // Email
-  const mailResult = sendEmail(userName, wish, userProfileResult.userProfile);
+  const mailResult = scheduleEmail(userName, wish, userProfileResult.userProfile);
   if (!mailResult) return { result: 'EMAIL_NOT_SENT', userProfile: userProfileResult.userProfile };
 
   return { result: 'SUCCESS', userProfile: userProfileResult.userProfile };

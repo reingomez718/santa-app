@@ -18,3 +18,9 @@ export type SendGiftResult =
   | 'BIRTHDAY_INVALID'
   | 'ERROR'
   | 'EMAIL_NOT_SENT';
+
+export interface EmailPoolEntry {
+    userName: string;
+    wish: string;
+    userProfile: UserProfile;
+  }

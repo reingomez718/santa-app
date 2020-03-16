@@ -9,3 +9,4 @@ export const MailerInfo = {
 
 export const DefaultSenderMail = 'do_not_reply@northpole.com';
 export const DefaultSantaMail = 'santa@northpole.com';
+export const LocalEmailScheduleFile = './email-list';

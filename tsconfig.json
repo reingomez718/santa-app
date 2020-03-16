@@ -6,13 +6,13 @@
     "noImplicitAny": true,
     "moduleResolution": "node",
     "outDir": "dist",
-    "baseUrl": "src",
+    "baseUrl": "app",
     "lib": ["es2015", "dom"],
     "jsx": "react",
     "inlineSourceMap": true,
     "paths": {
-      "*": ["node_modules/*", "src/types/*"],
+      "*": ["node_modules/*", "app/types/*"],
     }
   },
-  "include": ["src/**/*"]
+  "include": ["app/**/*"]
 }
