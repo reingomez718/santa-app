@@ -1,4 +1,4 @@
-import * as React from 'react'; 
+import React from 'react'; 
 
 export class InputText extends React.Component<Props> {
   public render(): JSX.Element {

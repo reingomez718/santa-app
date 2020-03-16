@@ -1,7 +1,7 @@
 import * as React from 'react'; 
 
 export class InputTextArea extends React.Component<Props> {
-  public defaultProps: Partial<Props> = {
+  public static defaultProps: Partial<Props> = {
     maxLength: 100,
   };
 

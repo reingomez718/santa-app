@@ -10,7 +10,7 @@
     "start": "nodemon dotenv/config -L -e ts,json,tsx"
   },
   "engines": {
-    "node": "8.x"
+    "node": "10.x"
   },
   "repository": {
     "url": "https://github.com/alj-devops/santa-app"
