@@ -9,12 +9,12 @@ export async function sendGift(userName: string, wish: string, maxAge: number = 
 
   const userUidResult = await getUserUid(userName);
   if (!userUidResult || userUidResult.result !== 200) return { result: 'USER_UNREGISTERED' };
-  
+
   const userProfileResult = await getUserProfile(userUidResult.uid);
   if (!userProfileResult || userProfileResult.result !== 200) return { result: 'USER_UNREGISTERED' };
   const age = getAge(userProfileResult.userProfile.birthdate);
-  if (!age) return { result: 'ERROR' };
   if (isNaN(age)) return { result: 'BIRTHDAY_INVALID' };
+  if (!age) return { result: 'ERROR' };
   if (age >= maxAge) return { result: 'USER_TOO_OLD' };
 
   return { result: 'SUCCESS', userProfile: userProfileResult.userProfile };
