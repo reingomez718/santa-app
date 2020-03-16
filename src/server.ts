@@ -1,8 +1,12 @@
-// server.js
+// server.ts
 // where your node app starts
 
+import { Request, Response, Router } from 'express';
+import * as bodyParser from 'body-parser';
+import express from 'express';
+import morgan from 'morgan';
+
 // init project
-const express = require('express');
 const morgan = require('morgan');
 const app = express();
 const bodyParser = require('body-parser');
