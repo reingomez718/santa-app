@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import { UserProfile } from '../common/interface';
 
 export async function getUserProfile(userUid: string): Promise<GetUserProfileResponse> {
   const response = await fetch(API_URL);
@@ -9,12 +10,6 @@ export async function getUserProfile(userUid: string): Promise<GetUserProfileRes
   return userProfile
     ? { userProfile, result: 200 }
     : { result: 204 };
-}
-
-interface UserProfile {
-  userUid: string;
-  birthdate: string;
-  address?: string;
 }
 
 interface GetUserProfileResponse {
