@@ -14,7 +14,7 @@ export async function sendGift(userName: string, wish: string, maxAge: number = 
   if (!userProfileResult || userProfileResult.result !== 200) return { result: 'USER_UNREGISTERED' };
   const age = getAge(userProfileResult.userProfile.birthdate);
   if (!age) return { result: 'ERROR' };
-
+  if (isNaN(age)) return { result: 'BIRTHDAY_INVALID' };
   if (age >= maxAge) return { result: 'USER_TOO_OLD' };
 
   return { result: 'SUCCESS', userProfile: userProfileResult.userProfile };
@@ -31,4 +31,5 @@ type SendGiftResult =
   | 'USER_TOO_OLD'
   | 'USER_EMPTY'
   | 'WISH_EMPTY'
+  | 'BIRTHDAY_INVALID'
   | 'ERROR';
