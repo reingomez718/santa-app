@@ -35,9 +35,19 @@ router.get(
   }
 );
 
-router.get('/', (req: Request, res: Response) => {  
-  res.sendFile(__dirname + '/views/index.html');
-});
+router.post(
+  '/sendGift',
+  (req: Request, res: Response) => { 
+      console.log(`userid: ${req.body.userid} | wish:${req.body.wish}`);
+  }
+);
+
+router.get(
+  '/',
+  (req: Request, res: Response) => { 
+    res.sendFile(__dirname + '/views/index.html');
+  }
+);
 
 app.use('/', router);
 
