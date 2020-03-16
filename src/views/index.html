@@ -34,11 +34,10 @@
 
   <main>
     <p class="bold">Ho ho ho, what you want for christma?</p>
-
-    who are you?
-    <input name="userid" placeholder="charlie.brown" />
-    <form method="post" action="sendGift">
-      what do you want for christmas?
+    Who are you?
+    <form method="post" action="/sendGift">
+      <input name="userid" placeholder="charlie.brown" />
+      What do you want for christmas?
       <textarea name="wish" rows="10" cols="45" maxlength="100" placeholder="Gifts!"></textarea>
       <br/>
       <button type="submit" id="submit-letter">Send</button>
