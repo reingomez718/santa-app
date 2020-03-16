@@ -5,8 +5,8 @@ import { Request, Response, Router } from 'express';
 import * as bodyParser from 'body-parser';
 import express from 'express';
 import morgan from 'morgan';
-// import { getUserUid } from './api/get-user-uid';
-// import { getUserProfile } from './api/get-user-profile';
+import { getUserUid } from './api/get-user-uid';
+import { getUserProfile } from './api/get-user-profile';
 import fetch from 'node-fetch';
 
 // init
@@ -21,7 +21,6 @@ app.use(morgan('log'));
 app.use(express.static('public'));
 
 // Routes
-/*
 router.get(
   '/getUser/:uid',
   async (req: Request, res: Response): Promise<void> => {
@@ -32,15 +31,16 @@ router.get(
 router.get(
   '/getUserProfile/:uid',
   async (req: Request, res: Response): Promise<void> => {
-    res.send('TEST');
-    // const response = await fetch('https://raw.githubusercontent.com/alj-devops/santa-data/master/userProfiles.json');
-    // const userProfiles = await response && await response.json();
-    
-    // res.send(await userProfiles);
+    res.send(await getUserProfile(req.params.uid));
   }
 );
-*/
-router.get('/', (req: Request, res: Response) => {
+
+router.post(
+  'sendGift/:userName/:wish'
+);
+
+// M
+router.get('/', (req: Request, res: Response) => {  
   res.sendFile(__dirname + '/views/index.html');
 });
 

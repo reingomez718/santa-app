@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-/*
+
 export async function getUserUid(userName: string): Promise<GetUserUidResponse> {
   const response = await fetch(API_URL);
   const users: User[] = await response && await response.json();
@@ -19,4 +19,3 @@ interface GetUserUidResponse {
 }
 
 const API_URL = 'https://raw.githubusercontent.com/alj-devops/santa-data/master/users.json';
-*/
