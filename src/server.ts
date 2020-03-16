@@ -35,11 +35,6 @@ router.get(
   }
 );
 
-router.post(
-  'sendGift/:userName/:wish'
-);
-
-// M
 router.get('/', (req: Request, res: Response) => {  
   res.sendFile(__dirname + '/views/index.html');
 });
