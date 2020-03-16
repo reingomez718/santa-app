@@ -52,7 +52,7 @@ export class App extends React.Component<Props, State> {
   private renderMain(): JSX.Element {
     return (
       <main>
-        <p className='bold'>Ho ho ho, what you want for christma?</p>
+        <p className='bold'>Ho ho ho, what you want for christmas?</p>
         <form method='post' action='/sendGift'>
           Who are you?
           <InputText placeholder='charlie.brown' name='userid'>
