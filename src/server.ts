@@ -5,8 +5,9 @@ import { Request, Response, Router } from 'express';
 import * as bodyParser from 'body-parser';
 import express from 'express';
 import morgan from 'morgan';
-import { getUserUid } from './api/get-user-uid';
-import { getUserProfile } from './api/get-user-profile';
+// import { getUserUid } from './api/get-user-uid';
+// import { getUserProfile } from './api/get-user-profile';
+import fetch from 'node-fetch';
 
 // init
 const app = express();
@@ -20,6 +21,7 @@ app.use(morgan('log'));
 app.use(express.static('public'));
 
 // Routes
+/*
 router.get(
   '/getUser/:uid',
   async (req: Request, res: Response): Promise<void> => {
@@ -30,18 +32,22 @@ router.get(
 router.get(
   '/getUserProfile/:uid',
   async (req: Request, res: Response): Promise<void> => {
-    res.send(await getUserProfile(req.params.uid));
+    res.send('TEST');
+    // const response = await fetch('https://raw.githubusercontent.com/alj-devops/santa-data/master/userProfiles.json');
+    // const userProfiles = await response && await response.json();
+    
+    // res.send(await userProfiles);
   }
 );
-
-router.get('/', (request, response) => {
-  response.sendFile(__dirname + '/views/index.html');
+*/
+router.get('/', (req: Request, res: Response) => {
+  res.sendFile(__dirname + '/views/index.html');
 });
 
 app.use('/', router);
 
 // Listen for requests
 const port = process.env.PORT || 3000;
-const listener = app.listen(port, function () {
+app.listen(port, () => {
   console.log(`Your app is listening on port ${port}`);
 });
