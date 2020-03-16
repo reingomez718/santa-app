@@ -2,23 +2,41 @@ import * as React from 'react';
 import { InputText } from '../../visual/input-text';
 import { Button } from '../../visual/button';
 import { InputTextArea } from '../../visual/input-textarea';
+import { SendGiftResult, UserProfile } from '../../../common/interface';
+import { getMessage } from './helpers/get-message';
 
 export class App extends React.Component<Props, State> {
+  public static defaultProps: Partial<Props>  = {
+    pageType: 'form', 
+  };
+
   constructor(props: Props) {
     super(props);
     this.state = {
       currentName: this.props.currentName,
       currentWish: this.props.currentWish,
+      infoMessage: 'test',
     };
   }
 
   public render(): JSX.Element {
+    const { pageType } = this.props;
     return (
       <html lang='en'>
         {this.renderHead()}
-        {this.renderBody()}
+        {pageType === 'form' ? this.renderInputFormBody() : this.renderResultBody()}
       </html>
     )
+  }
+
+  private renderResultBody(): JSX.Element {
+    if (!this.props.execResult) return;
+    const { execResult: { result, userProfile }, currentName } = this.props;
+    return (
+      <body>
+        <h3>{getMessage(result, currentName, userProfile && userProfile.address)}</h3>
+      </body>
+    );
   }
 
   private renderHead(): JSX.Element {
@@ -35,9 +53,10 @@ export class App extends React.Component<Props, State> {
     );
   }
 
-  private renderBody(): JSX.Element {
+  private renderInputFormBody(): JSX.Element {
     return (
       <body>
+        <h4>{this.state.infoMessage}</h4>
         <header>
           <h1>
             A letter to Santa
@@ -53,21 +72,65 @@ export class App extends React.Component<Props, State> {
     return (
       <main>
         <p className='bold'>Ho ho ho, what you want for christmas?</p>
-        <form method='post' action='/sendGift'>
-          Who are you?
-          <InputText placeholder='charlie.brown' name='userid'>
-            {this.state.currentName}
-          </InputText>
-          What do you want for christmas?
-          <br/>
-          <InputTextArea placeholder='Gifts!' name='wish'>
-            {this.state.currentWish}
-          </InputTextArea>
-          <Button label='Send' id='submit-letter' onClick={this.props.onSendClick}/>
-        </form>
+        Who are you?
+        <InputText
+          placeholder='charlie.brown'
+          name='userid'
+          onChange={this.handleUserIdOnChange}
+        >
+          {this.state.currentName}
+        </InputText>
+        What do you want for christmas?
+        <br/>
+        <InputTextArea
+          placeholder='Gifts!'
+          name='wish'
+          onChange={this.handleWishOnChange}
+        >
+          {this.state.currentWish}
+        </InputTextArea>
+        <Button
+          label='Send!'
+          id='submitletter'
+          onClick={this.handleSendClick}
+        />
       </main>
     );
   }
+
+  protected handleUserIdOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({
+      currentName: e.target.value,
+    });
+    console.log('AAASA' + e.target.value);
+  };
+
+  protected handleWishOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({
+      currentWish: e.target.value,
+    });
+  };
+
+  protected handleSendClick = (e: React.MouseEvent<HTMLElement>) => {
+    const { onSendClick } = this.props;
+
+    this.setState({
+      infoMessage: null,
+    });
+
+    console.log(this.state.currentName);
+    if (!this.state.currentName) {
+      this.setState({
+        infoMessage: getMessage('USER_EMPTY'),
+      });
+    } else if (!this.state.currentWish) {
+      this.setState({
+        infoMessage: getMessage('WISH_EMPTY'),
+      });
+    }
+
+    if (onSendClick) onSendClick(e);
+  };
 
   private renderFooter(): JSX.Element {
     return (
@@ -88,14 +151,17 @@ export type Props = StateProps & DispatchProps;
 export interface StateProps {
   currentName?: string;
   currentWish?: string;
+  pageType?: 'form' | 'result';
+  execResult?: { result: SendGiftResult, userProfile?: UserProfile };
+  infoMessage?: string;
 }
 
 export interface DispatchProps {
-  onChangeName?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSendClick?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 interface State {
   currentName?: string;
   currentWish?: string;
+  infoMessage?: string;
 }

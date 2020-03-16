@@ -1,7 +1,7 @@
 import { getUserUid } from './get-user-uid';
 import { getUserProfile } from './get-user-profile';
 import { getAge } from '../utils/get-age';
-import { UserProfile } from '../common/interface';
+import { UserProfile, SendGiftResult } from '../common/interface';
 
 export async function sendGift(userName: string, wish: string, maxAge: number = 10): Promise<SendGiftResponse> {
   if (!userName) return { result: 'USER_EMPTY' };
@@ -24,12 +24,3 @@ export interface SendGiftResponse {
   result: SendGiftResult;
   userProfile?: UserProfile
 }
-
-type SendGiftResult =
-  | 'SUCCESS'
-  | 'USER_UNREGISTERED'
-  | 'USER_TOO_OLD'
-  | 'USER_EMPTY'
-  | 'WISH_EMPTY'
-  | 'BIRTHDAY_INVALID'
-  | 'ERROR';
