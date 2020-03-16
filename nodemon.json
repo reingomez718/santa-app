@@ -3,7 +3,7 @@
     "env": {
     "NODE_ENV": "development"
   },
-  "watch": ["src", "src/"],
+  "watch": ["src", "public"],
   "ignore": ["tests/**/*.ts"],
   "exec": "ts-node ./src/server.ts"
 }

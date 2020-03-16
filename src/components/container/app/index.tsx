@@ -31,6 +31,7 @@ export class App extends React.Component<Props, State> {
         <meta charSet='utf-8' />
         <link id='favicon' rel='icon' href='https://glitch.com/edit/favicon-app.ico' type='image/x-icon' />
         <link rel='stylesheet' href='/style.css' />
+        <script src="/client.js" defer />
       </head>
     );
   }
@@ -42,6 +43,8 @@ export class App extends React.Component<Props, State> {
           <h1>
             A letter to Santa
           </h1>
+          <br />
+          <h4 id='display-status-message'/>
         </header>
         {this.renderMain()}
         {this.renderFooter()}
@@ -53,18 +56,16 @@ export class App extends React.Component<Props, State> {
     return (
       <main>
         <p className='bold'>Ho ho ho, what you want for christmas?</p>
-        <form method='post' action='/sendGift'>
-          Who are you?
-          <InputText placeholder='charlie.brown' name='userid'>
-            {this.state.currentName}
-          </InputText>
-          What do you want for christmas?
-          <br/>
-          <InputTextArea placeholder='Gifts!' name='wish'>
-            {this.state.currentWish}
-          </InputTextArea>
-          <Button label='Send' id='submit-letter' onClick={this.props.onSendClick}/>
-        </form>
+        Who are you?
+        <InputText placeholder='charlie.brown' name='userName' id='input-user-name'>
+          {this.state.currentName}
+        </InputText>
+        What do you want for christmas?
+        <br/>
+        <InputTextArea placeholder='Gifts!' name='wish' id='input-wish'>
+          {this.state.currentWish}
+        </InputTextArea>
+        <Button label='Send' id='button-send' onClick={this.props.onSendClick}/>
       </main>
     );
   }

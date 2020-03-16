@@ -6,10 +6,11 @@ export class InputTextArea extends React.Component<Props> {
   };
 
   public render(): JSX.Element {
-    const { name, maxLength, children, placeholder } = this.props;
+    const { name, maxLength, children, placeholder, id } = this.props;
     return (
       <textarea
         name={name}
+        id={id}
         maxLength={maxLength}
         placeholder={placeholder}
         value={children}
@@ -22,6 +23,7 @@ export type Props = StateProps & DispatchProps;
 
 export interface StateProps {
   name?: string;
+  id?: string;
   maxLength?: number;
   placeholder?: string;
   children?: string;

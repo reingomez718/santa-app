@@ -8,3 +8,13 @@ export interface UserProfile {
   birthdate: string;
   address?: string;
 }
+
+export type SendGiftResult =
+  | 'SUCCESS'
+  | 'USER_UNREGISTERED'
+  | 'USER_TOO_OLD'
+  | 'USER_EMPTY'
+  | 'WISH_EMPTY'
+  | 'BIRTHDAY_INVALID'
+  | 'ERROR'
+  | 'EMAIL_NOT_SENT';
